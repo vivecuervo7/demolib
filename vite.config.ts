@@ -1,3 +1,6 @@
+/// <reference types="vitest" />
+/// <reference types="vite/client" />
+
 import react from '@vitejs/plugin-react-swc'
 import { glob } from 'glob'
 import { fileURLToPath } from 'node:url'
@@ -9,6 +12,11 @@ import { libInjectCss } from 'vite-plugin-lib-inject-css'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  test: {
+    environment: 'jsdom',
+    globals: true,
+    root: 'src/'
+  },
   build: {
     sourcemap: true,
     emptyOutDir: true,
@@ -20,11 +28,13 @@ export default defineConfig({
     },
     rollupOptions: {
       input: Object.fromEntries(
-        glob.sync('src/**/*.{ts,tsx}', { ignore: ['src/**/*.d.ts', 'src/**/*.stories.{ts,tsx}'] }).map((file: string) => {
-          const entryName = path.relative('src', file.slice(0, file.length - path.extname(file).length)) // Remove `src/` and file extensions
-          const entryUrl = fileURLToPath(new URL(file, import.meta.url)) // This expands the relative paths to absolute paths
-          return [entryName, entryUrl]
-        })
+        glob
+          .sync('src/**/*.{ts,tsx}', { ignore: ['src/**/*.d.ts', 'src/**/*.stories.{ts,tsx}', 'src/**/*.test.{ts,tsx}'] })
+          .map((file: string) => {
+            const entryName = path.relative('src', file.slice(0, file.length - path.extname(file).length)) // Remove `src/` and file extensions
+            const entryUrl = fileURLToPath(new URL(file, import.meta.url)) // This expands the relative paths to absolute paths
+            return [entryName, entryUrl]
+          })
       ),
       output: {
         globals: {

@@ -28,3 +28,6 @@ dist-ssr
 
 # Rollup bundle size visualization
 **/rollup-build-size.html
+
+# Storybook
+.storybook

@@ -1,9 +1,14 @@
 import { ComponentProps } from 'react'
 import styles from './styles.module.css'
+import cn from 'classnames'
 
-const Button = (props: ComponentProps<'button'>) => {
+interface ButtonProps extends ComponentProps<'button'> {
+  variant?: 'primary' | 'secondary'
+}
+
+const Button = ({ variant = 'primary', ...props }: ButtonProps) => {
   return (
-    <button className={styles.root} {...props}>
+    <button className={cn(styles.root, styles[variant])} {...props}>
       {props.children}
     </button>
   )

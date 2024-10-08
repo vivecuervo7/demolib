@@ -1,7 +1,37 @@
 .root {
-  background-color: #007bff;
   color: white;
   border: none;
   padding: 10px 20px;
   cursor: pointer;
+  background-color: var(--background);
+  transition:
+    background-color 0.1s,
+    transform 0.05s;
+  border-radius: 4px;
+  font-family: sans-serif;
+
+  &:hover {
+    background-color: var(--background-hover);
+  }
+
+  &:disabled {
+    background-color: var(--background-disabled);
+    cursor: default;
+  }
+
+  &:active {
+    transform: scale(0.975);
+  }
+
+  &.primary {
+    --background: #2196f3;
+    --background-hover: #6eb8f8;
+    --background-disabled: #8bb8e5;
+  }
+
+  &.secondary {
+    --background: #3f51b5;
+    --background-hover: #5c6bc0;
+    --background-disabled: #7a9bc2;
+  }
 }

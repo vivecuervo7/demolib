@@ -20,7 +20,7 @@ export default defineConfig({
     },
     rollupOptions: {
       input: Object.fromEntries(
-        glob.sync('src/**/*.{ts,tsx}', { ignore: ['src/**/*.d.ts'] }).map((file: string) => {
+        glob.sync('src/**/*.{ts,tsx}', { ignore: ['src/**/*.d.ts', 'src/**/*.stories.{ts,tsx}'] }).map((file: string) => {
           const entryName = path.relative('src', file.slice(0, file.length - path.extname(file).length)) // Remove `src/` and file extensions
           const entryUrl = fileURLToPath(new URL(file, import.meta.url)) // This expands the relative paths to absolute paths
           return [entryName, entryUrl]
@@ -33,7 +33,7 @@ export default defineConfig({
         entryFileNames: '[name].js',
         assetFileNames: 'assets/[name][extname]'
       },
-      external: ['react', 'react-dom', 'react/jsx-runtime']
+      external: ['react', 'react-dom', 'react/jsx-runtime', 'classnames']
     }
   },
   plugins: [react(), libInjectCss(), dts({ rollupTypes: true }), visualizer({ filename: 'rollup-build-size.html' })]

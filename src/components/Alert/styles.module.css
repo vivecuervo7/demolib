@@ -1,9 +1,32 @@
 .root {
-  background-color: #0088ff;
-  color: white;
-  border: solid 1px #007bff;
+  background-color: var(--background);
+  color: var(--color);
+  border: solid 1px var(--border);
   padding: 10px 20px;
   display: grid;
   grid-template-columns: 30px 1fr;
   align-items: center;
+  border-radius: 8px;
+  font-family: sans-serif;
+  user-select: none;
+
+  > span {
+    text-align: center;
+  }
+
+  > svg {
+    height: 32px;
+  }
+
+  &.primary {
+    --color: #2196f3;
+    --border: #2196f3;
+    --background: #e6f3ff;
+  }
+
+  &.danger {
+    --color: #f44336;
+    --border: #f44336;
+    --background: #ffe5e5;
+  }
 }

@@ -1,0 +1,3 @@
+pnpm-lock.*
+**/*.tsbuildinfo
+**/rollup-build-size.html
